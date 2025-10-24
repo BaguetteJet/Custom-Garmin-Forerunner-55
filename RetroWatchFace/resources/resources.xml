@@ -1,0 +1,4 @@
+<resources>
+    <string id="AppName">RetroWatchFace</string>
+    <bitmap id="LauncherIcon" filename="drawables/empty.png" dithering="none" />
+</resources>
