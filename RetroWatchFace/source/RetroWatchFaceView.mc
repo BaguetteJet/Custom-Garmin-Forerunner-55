@@ -59,14 +59,6 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
             lowerText,  
             Graphics.TEXT_JUSTIFY_CENTER
         );
-        // Display text top
-        dc.drawText(
-            dc.getWidth()/2,
-            dc.getHeight()/8,
-            Graphics.FONT_XTINY,
-            ActivityMonitor.getInfo().steps,
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
 
         // 8-Bit colour boxes
         for (var i = 0; i < 8; i++) {
@@ -81,6 +73,7 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
         var BAT = System.getSystemStats().battery;
         var BOD = getBodyBattery();
         var NOT = System.getDeviceSettings().notificationCount;
+
 
         // RED - Heart RateP
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
