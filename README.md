@@ -10,13 +10,14 @@ Using this setup, I was able to experiment with custom fonts, color schemes, and
 ## First Design: Retro 8-bit
 My first design idea was inspired by old-school 8-bit color command-line terminals, featuring bold, contrasting colors and pixelated graphics. I aimed to capture the retro digital aesthetic while adapting it to the Forerunner 55’s limited display.   
 
-<img width="387" height="611" alt="image" src="https://github.com/user-attachments/assets/74ee785a-263b-4c81-918d-9512cc974961" /> <img width="402" height="603" alt="image" src="https://github.com/user-attachments/assets/b848b133-ec53-41de-ab05-3d72a9a354d8" />  
-
-<img width="826" height="509" alt="image" src="https://github.com/user-attachments/assets/90edd5d1-9889-4d85-b618-7b1bddd83b4e" />  
+<img width="387" height="611" alt="image" src="https://github.com/user-attachments/assets/03a3715a-11e2-48e2-84c9-9702f7136755" />  <img width="402" height="603" alt="image" src="https://github.com/user-attachments/assets/43fabd9f-8a8f-40c2-8bbe-c556511f5851" />
+ 
+<img width="826" height="509" alt="image" src="https://github.com/user-attachments/assets/43ce51d7-4c4f-44b1-ad35-2fbcd64a531d" />
 
 I really liked how this simple watch face turned. It was clean, colorful, and easy to read. However, it also lacked functionality beyond simply showing the time. To make it more useful, I decided to transform the eight colorful squares into a dynamic bar-chart display, where each color represents a different type of data. I switched out the "Hellow World" text for the day and date.
 
-<img width="387" height="611" alt="image" src="https://github.com/user-attachments/assets/405cda87-c79e-4cff-bf01-0aaf6680c81b" /> <img width="388" height="608" alt="image" src="https://github.com/user-attachments/assets/bc0e4d9d-50ce-4bdd-bfeb-72522419f4b4" /> 
+<img width="387" height="611" alt="image" src="https://github.com/user-attachments/assets/8cec08e6-aeb5-4e73-b602-656a1a3c4270" />   <img width="388" height="608" alt="image" src="https://github.com/user-attachments/assets/2f673998-7f56-4bd0-ad13-57ded4f1cd84" />
+
 
 | **Colour**  |  **Data**                 |
 |:--------|:------------------------------|
