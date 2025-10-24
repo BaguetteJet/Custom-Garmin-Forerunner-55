@@ -28,7 +28,7 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
     function onUpdate(dc) {
 
         var currentTime = getTime();
-        var lowerText = getDate();
+        var lowerText = "Hello World";
 
         var colour1 = Graphics.COLOR_WHITE;
         var colour2 = Graphics.COLOR_BLACK;
@@ -59,6 +59,14 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
             lowerText,  
             Graphics.TEXT_JUSTIFY_CENTER
         );
+        // Display text top
+        dc.drawText(
+            dc.getWidth()/2,
+            dc.getHeight()/8,
+            Graphics.FONT_XTINY,
+            ActivityMonitor.getInfo().steps,
+            Graphics.TEXT_JUSTIFY_CENTER
+        );
 
         // 8-Bit colour boxes
         for (var i = 0; i < 8; i++) {
@@ -66,141 +74,22 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
             dc.fillRectangle(dc.getWidth()/2 - pix*2*(4-i), dc.getHeight()/2 - pix*5, pix*2, pix*2);
         }
 
-        var HR = ActivityMonitor.getHeartRateHistory(1, true).next().heartRate;
-        var STP = ActivityMonitor.getInfo().steps;
-        var STR = getStress();
-        var CON = (System.getDeviceSettings().connectionAvailable) ? pix*2 : 0;
-        var BAT = System.getSystemStats().battery;
-        var BOD = getBodyBattery();
-        var NOT = System.getDeviceSettings().notificationCount;
+        // Draw Battery Arc
+        var ARCLENGTH = 60;
+        var ARCWIDTH = 2;
+        dc.setPenWidth(ARCWIDTH);
 
+        var WIDTH = dc.getWidth();
+        var HEIGHT = dc.getHeight();
+        
 
-        // RED - Heart RateP
-        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_TRANSPARENT);
-        HR = (HR > 0) ? HR : 0;
-        height = pix*(HR)/UserProfile.getProfile().averageRestingHeartRate;
-        height = (height > pix) ? height : pix;
-        dc.fillRectangle(dc.getWidth()/2 - pix*6, dc.getHeight()/2 - pix*4.9 - height, pix*2, height);
-        dc.drawText(
-            dc.getWidth()/2 - pix*5,
-            dc.getHeight()/2 - pix*7 - height,
-            Graphics.FONT_XTINY,
-            (HR > 0) ? HR : "-",
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
-
-        // GREEN - Steps
-        dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_TRANSPARENT);
-        height = pix*2*(STP)/ActivityMonitor.getInfo().stepGoal;
-        height = (height < pix*3.3) ? height : pix*3.3;
-        dc.fillRectangle(dc.getWidth()/2 - pix*4, dc.getHeight()/2 - pix*4.9 - height, pix*2, height);
-        dc.drawText(
-            dc.getWidth()/2 - pix*3,
-            dc.getHeight()/2 - pix*7 - height,
-            Graphics.FONT_XTINY,
-            (STP/ActivityMonitor.getInfo().stepGoal).toNumber().format("%d"),
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
-
-        // YELLOW - Stress
-        dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
-        height = pix*2*STR/100;
-        dc.fillRectangle(dc.getWidth()/2 - pix*2, dc.getHeight()/2 - pix*4.9 - height, pix*2, height);
-        dc.drawText(
-            dc.getWidth()/2 - pix*1,
-            dc.getHeight()/2 - pix*7 - height,
-            Graphics.FONT_XTINY,
-            (STR > 0) ? STR.format("%d") : "-",
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
-
-        // DKBLUE - Bluetooth
         dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
-        height = CON;
-        dc.fillRectangle(dc.getWidth()/2 - pix*0, dc.getHeight()/2 - pix*4.9 - height, pix*2, height);
-        dc.drawText(
-            dc.getWidth()/2 - pix*-1,
-            dc.getHeight()/2 - pix*7 - height,
-            Graphics.FONT_XTINY,
-            (CON > 0) ? "*" : "",
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
+        dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 - ARCLENGTH / 2);
 
-        // PINK - Battery
-        dc.setColor(Graphics.COLOR_PINK, Graphics.COLOR_TRANSPARENT);
-        height = pix*3.3*BAT/100;
-        dc.fillRectangle(dc.getWidth()/2 - pix*-2, dc.getHeight()/2 - pix*4.9 - height, pix*2, height);
-        dc.drawText(
-            dc.getWidth()/2 - pix*-3,
-            dc.getHeight()/2 - pix*7 - height,
-            Graphics.FONT_XTINY,
-            BAT.format("%d"),
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
-
-        // BLUE - Body Battery
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-        height = pix*2.5*BOD/100;
-        dc.fillRectangle(dc.getWidth()/2 - pix*-4, dc.getHeight()/2 - pix*4.9 - height, pix*2, height);
-        dc.drawText(
-            dc.getWidth()/2 - pix*-5,
-            dc.getHeight()/2 - pix*7 - height,
-            Graphics.FONT_XTINY,
-            (BOD > 0) ? BOD.format("%2d") : "-",
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
-
-        // WHITE - Notification
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        height = 0;
-        dc.fillRectangle(dc.getWidth()/2 - pix*-6, dc.getHeight()/2 - pix*4.9 - height, pix*2, height);
-        dc.drawText(
-            dc.getWidth()/2 - pix*-7,
-            dc.getHeight()/2 - pix*7 - height,
-            Graphics.FONT_XTINY,
-            (NOT > 0) ? NOT : "",
-            Graphics.TEXT_JUSTIFY_CENTER
-        );
-
+        dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 + ARCLENGTH / 2 - ARCLENGTH * System.getSystemStats().battery / 100);
     }
 
-    function getStressIterator() {
-        if ((Toybox has: SensorHistory) && (Toybox.SensorHistory has: getStressHistory)) {
-            return Toybox.SensorHistory.getStressHistory({: period => 1,: order => Toybox.SensorHistory.ORDER_NEWEST_FIRST});
-        }
-        return null;
-    }
-
-    function getStress() as Number {
-        var strIterator = getStressIterator();
-        var sample = strIterator.next();
-        while (sample != null) {
-            if (sample.data != null) {
-                return sample.data;
-            }
-            sample = strIterator.next();
-        }
-        return -1;
-    }
-
-    function getBodyBatteryIterator() {
-        if ((Toybox has: SensorHistory) && (Toybox.SensorHistory has: getBodyBatteryHistory)) {
-            return Toybox.SensorHistory.getBodyBatteryHistory({: period => 1,: order => Toybox.SensorHistory.ORDER_NEWEST_FIRST});
-        }
-        return null;
-    }
-
-    function getBodyBattery() as Number or Null {
-        var bbIterator = getBodyBatteryIterator();
-        var sample = bbIterator.next();
-        while (sample != null) {
-            if (sample.data != null) {
-                return sample.data;
-            }
-            sample = bbIterator.next();
-        }
-        return -1;
-    }
 
     function getTime() as String {
         var clockTime = System.getClockTime();
