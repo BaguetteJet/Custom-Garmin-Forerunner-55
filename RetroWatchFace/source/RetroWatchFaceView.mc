@@ -32,11 +32,17 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
 
         var colour1 = Graphics.COLOR_WHITE;
         var colour2 = Graphics.COLOR_BLACK;
+        var colour3 = Graphics.COLOR_BLUE;
+        var colour4 = Graphics.COLOR_DK_BLUE;
 
         if (System.getDeviceSettings().notificationCount > 0) {
             colour1 = Graphics.COLOR_BLACK;
             colour2 = Graphics.COLOR_WHITE;
+            colour3 = Graphics.COLOR_DK_BLUE;
+            colour4 = Graphics.COLOR_BLUE;
         }
+
+        if (System.getSystemStats().battery < 25) {colour3 = Graphics.COLOR_RED;}
 
         dc.setColor(colour2, colour2);
         dc.clear();
@@ -82,14 +88,12 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
         var WIDTH = dc.getWidth();
         var HEIGHT = dc.getHeight();
         
-
-        dc.setColor(Graphics.COLOR_DK_BLUE, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(colour4, Graphics.COLOR_TRANSPARENT);
         dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 - ARCLENGTH / 2);
 
-        dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(colour3, Graphics.COLOR_TRANSPARENT);
         dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 + ARCLENGTH / 2 - ARCLENGTH * System.getSystemStats().battery / 100);
     }
-
 
     function getTime() as String {
         var clockTime = System.getClockTime();
