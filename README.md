@@ -14,7 +14,9 @@ My first design idea was inspired by old-school 8-bit color command-line termina
  
 <img width="826" height="509" alt="image" src="https://github.com/user-attachments/assets/43ce51d7-4c4f-44b1-ad35-2fbcd64a531d" />
 
-I really liked how this simple watch face turned. It was clean, colorful, and easy to read. However, it also lacked functionality beyond simply showing the time. To make it more useful, I decided to transform the eight colorful squares into a dynamic bar-chart display, where each color represents a different type of data. I switched out the "Hellow World" text for the day and date.
+## Displaying More Information
+
+I really liked how this simple watch face turned out. It was clean, colorful, and easy to read. However, it also lacked functionality beyond simply showing the time. To make it more useful, I decided to transform the eight colorful squares into a dynamic bar-chart display, where each color represents a different type of data. I switched out the "Hellow World" text for the day and date.
 
 <img width="387" height="611" alt="image" src="https://github.com/user-attachments/assets/8cec08e6-aeb5-4e73-b602-656a1a3c4270" />   <img width="388" height="608" alt="image" src="https://github.com/user-attachments/assets/2f673998-7f56-4bd0-ad13-57ded4f1cd84" />
 
@@ -29,6 +31,14 @@ I really liked how this simple watch face turned. It was clean, colorful, and ea
 | `PINK`    | battery %                   |
 | `BLUE`    | body battery                |
 | `WHITE`   | notifications               |
+
+## Focusing on Basics
+
+Although the previous design was more practical, it felt cluttered with too much information. I decided to return to a simpler layout that focuses on the information I check most often (step count and watch battery). A thin arc on the left side now represents the battery percentage, while the step counter sits above the bar. Since I frequently use my smartwatch to check for notifications, the watch face switchs from black to white when notifications are present. Thanks to the watch’s unique transflective display, this feature doesn’t use any more battery life!
+
+<img width="370" height="374" alt="image" src="https://github.com/user-attachments/assets/7d143558-ebd6-41a6-9764-e91f9ae642c0" />  <img width="370" height="374" alt="image" src="https://github.com/user-attachments/assets/b36992da-895c-46e1-baef-caf5587f48cb" />
+
+
 
 ## Useful Links
 - Basic tutrorial: https://medium.com/@ericbt/design-your-own-garmin-watch-face-21d004d38f99
