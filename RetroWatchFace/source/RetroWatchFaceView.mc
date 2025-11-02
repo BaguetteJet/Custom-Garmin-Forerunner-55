@@ -28,6 +28,7 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
     function onUpdate(dc) {
 
         var currentTime = getTime();
+        var upperText = ActivityMonitor.getInfo().steps;
         var lowerText = "Hello World";
 
         var colour1 = Graphics.COLOR_WHITE;
@@ -42,7 +43,7 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
             colour4 = Graphics.COLOR_BLUE;
         }
 
-        if (System.getSystemStats().battery < 25) {colour3 = Graphics.COLOR_RED;}
+        if (System.getSystemStats().battery < 20) {colour3 = Graphics.COLOR_RED;}
 
         dc.setColor(colour2, colour2);
         dc.clear();
@@ -57,7 +58,7 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
             currentTime,
             Graphics.TEXT_JUSTIFY_CENTER
         );
-        // Display Text/Date
+        // Display Lower Text
         dc.drawText(
             dc.getWidth()/2,
             dc.getHeight()/1.5,
@@ -65,12 +66,12 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
             lowerText,  
             Graphics.TEXT_JUSTIFY_CENTER
         );
-        // Display text top
+        // Display Upper Text
         dc.drawText(
             dc.getWidth()/2,
             dc.getHeight()/8,
             Graphics.FONT_XTINY,
-            ActivityMonitor.getInfo().steps,
+            upperText,
             Graphics.TEXT_JUSTIFY_CENTER
         );
 
@@ -82,17 +83,17 @@ class RetroWatchFaceView extends WatchUi.WatchFace {
 
         // Draw Battery Arc
         var ARCLENGTH = 60;
-        var ARCWIDTH = 2;
+        var ARCWIDTH = 3;
         dc.setPenWidth(ARCWIDTH);
 
         var WIDTH = dc.getWidth();
         var HEIGHT = dc.getHeight();
         
         dc.setColor(colour4, Graphics.COLOR_TRANSPARENT);
-        dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 - ARCLENGTH / 2);
+        dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2 + 1, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 - ARCLENGTH / 2);
 
         dc.setColor(colour3, Graphics.COLOR_TRANSPARENT);
-        dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 + ARCLENGTH / 2 - ARCLENGTH * System.getSystemStats().battery / 100);
+        dc.drawArc(WIDTH / 2, HEIGHT / 2, HEIGHT / 2 - ARCWIDTH / 2 + 1, Graphics.ARC_CLOCKWISE, 180 + ARCLENGTH / 2, 180 + ARCLENGTH / 2 - ARCLENGTH * System.getSystemStats().battery / 100);
     }
 
     function getTime() as String {
